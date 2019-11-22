@@ -130,36 +130,36 @@ class CNNBatchNorm(nn.Module):
 if __name__ == "__main__": 
     ''' make a dummy input forward see if every goes as expected '''
     # nn should be able to fit random data perfectly. 
-    nn_model=CNNBatchNorm(input_feature_shape=(10, 11,11), n_actions=6)
-    batch_trans=[]
-    import random
-    for i in range(10):
-        s=torch.rand(10,11,11)
-        s=torch.zeros(10,11,11)
-        s[0][0][0]+=float(i)
-        #a=random.randint(0,5)
-        a=i%6
-        r=1.0
-        v=0.5
-        p=0.4
-        R=0.9
-        action_mask=np.random.choice([0, 1], size=(6,), p=[0./3, 3./3])
-        trans=Transition(state=s, action=a, reward=r, value_of_state=v, prob_of_action=p, cumulative_return=R, action_mask=action_mask)
-        batch_trans.append(trans)
+#    nn_model=CNNBatchNorm(input_feature_shape=(10, 11,11), n_actions=6)
+#    batch_trans=[]
+#    import random
+#    for i in range(10):
+#        s=torch.rand(10,11,11)
+#        s=torch.zeros(10,11,11)
+#        s[0][0][0]+=float(i)
+#        #a=random.randint(0,5)
+#        a=i%6
+#        r=1.0
+#        v=0.5
+#        p=0.4
+#        R=0.9
+#        action_mask=np.random.choice([0, 1], size=(6,), p=[0./3, 3./3])
+#        trans=Transition(state=s, action=a, reward=r, value_of_state=v, prob_of_action=p, cumulative_return=R, action_mask=action_mask)
+#        batch_trans.append(trans)
 
-    opt=optim.Adam(nn_model.parameters(), lr=1e-3)
+#    opt=optim.Adam(nn_model.parameters(), lr=1e-3)
     #opt=optim.SGD(nn_model.parameters(), lr=0.01, momentum=0.9)
     
-    for i in range(1000):
-        opt.zero_grad()
+#    for i in range(1000):
+#        opt.zero_grad()
         #usually, prepare data X=[], batch_seq_target
-        objective='maximum_likelihood'
+#        objective='maximum_likelihood'
         #objective='a2c'
         #objective='ppo'
-        p_logits, v_logit, loss=nn_model(batch_trans, only_inference=False, objective=objective, entropy_coeff=0.0)
-        loss.backward()
-        opt.step()
-        print('--step', i, 'loss:', loss.data.item())
+#        p_logits, v_logit, loss=nn_model.compute_loss(batch_trans, objective=objective, entropy_coeff=0.0)
+#        loss.backward()
+#        opt.step()
+#        print('--step', i, 'loss:', loss.data.item())
     #now try save and load model parameters
-    torch.save(nn_model.state_dict(), '/tmp/ppo_torch_test.pt')
+#    torch.save(nn_model.state_dict(), '/tmp/ppo_torch_test.pt')
 
