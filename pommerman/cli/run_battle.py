@@ -18,16 +18,19 @@ import os
 import random
 import sys
 import time
+import sys
 
 import argparse
 import numpy as np
 
-from .. import helpers
-from .. import make
+from pommerman import helpers
+from pommerman import make
+#from .. import helpers
+#from .. import make
 from pommerman import utility
 
 
-def run(args, num_times=1, seed=None):
+def run(args, seed=None):
     '''Wrapper to help start the game'''
     config = args.config
     record_pngs_dir = args.record_pngs_dir
@@ -36,6 +39,7 @@ def run(args, num_times=1, seed=None):
     game_state_file = args.game_state_file
     render_mode = args.render_mode
     do_sleep = args.do_sleep
+    num_times = int(args.num_times)
 
     agents = [
         helpers.make_agent_from_string(agent_string, agent_id)
@@ -168,6 +172,10 @@ def main():
         '--do_sleep',
         default=True,
         help="Whether we sleep after each rendering.")
+    parser.add_argument(
+        '--num_times',
+        default=1,
+        help="Number of times you want the game to be played.")
     args = parser.parse_args()
     run(args)
 

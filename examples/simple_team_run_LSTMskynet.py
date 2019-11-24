@@ -20,7 +20,7 @@ def main():
     # Create a set of agents (exactly four)
     lstm_nn_model = CNN_LSTM(input_feature_shape=(9,11,11), n_actions=6, 
             n_filters_per_layer=64, n_cnn_layers=6)
-    lstm_nn_model.load_state_dict(torch.load('/home/cgao3/pommerman/pommerman/agents/LOGS/ppo_cnn_lstm_cnn_6_64_27.pt', map_location=lambda storage, loc: storage))
+    #lstm_nn_model.load_state_dict(torch.load('/home/cgao3/pommerman/pommerman/agents/LOGS/ppo_cnn_lstm_cnn_6_64_27.pt', map_location=lambda storage, loc: storage))
 # torch.load('my_file.pt', map_location=lambda storage, loc: storage) #for map CUDA pt to CPU
 
     nn_agent = NNAgent(lstm_nn_model)

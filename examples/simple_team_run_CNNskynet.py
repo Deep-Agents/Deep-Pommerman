@@ -24,11 +24,11 @@ def main():
     n_filters_per_layer=64
     n_cnn_layers=4
     nn_model=CNNBatchNorm(input_feature_shape=shape, n_actions=n_actions, n_filters_per_layer=n_filters_per_layer, n_cnn_layers=n_cnn_layers)
-    nn_path='./output/NN_MODELS/ppo_CNN4_64_199.pt' #CHANGE THIS to your actual checkpoint file. Currently assumes you are calling the script from main dir
-    nn_model.load_state_dict(torch.load(nn_path, map_location=lambda storage, loc: storage))
+    #nn_path='./output/NN_MODELS/ppo_CNN4_64_199.pt' #CHANGE THIS to your actual checkpoint file. Currently assumes you are calling the script from main dir
+    #nn_model.load_state_dict(torch.load(nn_path, map_location=lambda storage, loc: storage))
     selection='softmax'
-    nn_agent = NNAgent(nn_model, action_selection=selection, is_training=False)
-    nn_agent2 = NNAgent(nn_model, action_selection=selection, is_training=False)
+    nn_agent = NNAgent(nn_model, action_selection=selection, is_training=True)
+    nn_agent2 = NNAgent(nn_model, action_selection=selection, is_training=True)
     
     idx=0
     team_id=(idx+2)%4
